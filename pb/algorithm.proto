@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+option go_package = "github.com/audrenbdb/algorithm-microsrv/pb";
+
+service Solve {
+    rpc FizzBuzz(FizzBuzzRequest) returns (FizzBuzzResponse) {}
+}
+
+message FizzBuzzRequest {
+    repeated int32 puzzle = 1;
+}
+
+message FizzBuzzResponse {
+    string solution = 1;
+}
