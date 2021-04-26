@@ -8,33 +8,37 @@ import (
 
 func TestSolveFizzBuzz(t *testing.T) {
 	var tests = []struct {
-		inputArray   []int32
+		puzzleLength int
 		outputString string
 	}{
 		{
-			inputArray:   []int32{3},
-			outputString: "Fizz",
+			puzzleLength: 1,
+			outputString: "1",
 		},
 		{
-			inputArray:   []int32{3, 5},
-			outputString: "FizzBuzz",
+			puzzleLength: 2,
+			outputString: "12",
 		},
 		{
-			inputArray:   []int32{15},
-			outputString: "FizzBuzz",
+			puzzleLength: 3,
+			outputString: "12Fizz",
 		},
 		{
-			inputArray:   []int32{2},
-			outputString: "2",
+			puzzleLength: 5,
+			outputString: "12Fizz4Buzz",
 		},
 		{
-			inputArray:   []int32{2, 3, 4, 5, 15, 6, 1},
-			outputString: "2Fizz4BuzzFizzBuzzFizz1",
+			puzzleLength: 15,
+			outputString: "12Fizz4BuzzFizz78FizzBuzz11Fizz1314FizzBuzz",
+		},
+		{
+			puzzleLength: 16,
+			outputString: "12Fizz4BuzzFizz78FizzBuzz11Fizz1314FizzBuzz16",
 		},
 	}
 
 	for _, test := range tests {
-		result := Solve(test.inputArray)
+		result := Solve(test.puzzleLength)
 		assert.Equal(t, test.outputString, result)
 	}
 }

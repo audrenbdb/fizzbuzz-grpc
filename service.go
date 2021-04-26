@@ -14,9 +14,9 @@ func NewService() *service {
 }
 
 type Service interface {
-	FizzBuzz(ctx context.Context, encodedPuzzle []int32) (string, error)
+	FizzBuzz(ctx context.Context, encodedPuzzleLength int32) (string, error)
 }
 
-func (s *service) FizzBuzz(_ context.Context, puzzle []int32) (string, error) {
-	return fizzbuzz.Solve(puzzle), nil
+func (s *service) FizzBuzz(_ context.Context, puzzleLength int32) (string, error) {
+	return fizzbuzz.Solve(int(puzzleLength)), nil
 }

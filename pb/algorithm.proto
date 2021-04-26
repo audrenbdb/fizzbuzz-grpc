@@ -7,7 +7,7 @@ service Solve {
 }
 
 message FizzBuzzRequest {
-    repeated int32 puzzle = 1;
+    int32 puzzleLength = 1;
 }
 
 message FizzBuzzResponse {

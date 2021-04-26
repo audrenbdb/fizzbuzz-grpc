@@ -12,7 +12,7 @@ type Endpoints struct {
 }
 
 type FizzBuzzRequest struct {
-	EncodedPuzzle []int32
+	EncodedPuzzleLength int32
 }
 
 type FizzBuzzResponse struct {
@@ -28,7 +28,7 @@ func CreateEndpoints(s *service) Endpoints {
 func createFizzBuzzEndpoint(s *service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(FizzBuzzRequest)
-		res, _ := s.FizzBuzz(ctx, req.EncodedPuzzle)
+		res, _ := s.FizzBuzz(ctx, req.EncodedPuzzleLength)
 		return FizzBuzzResponse{DecodedPuzzle: res}, nil
 	}
 }

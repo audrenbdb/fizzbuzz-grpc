@@ -33,7 +33,7 @@ func (s *grpcServer) FizzBuzz(ctx context.Context, req *pb.FizzBuzzRequest) (*pb
 func decodeFizzBuzzRequest(_ context.Context, request interface{}) (interface{}, error) {
 	req := request.(*pb.FizzBuzzRequest)
 	return FizzBuzzRequest{
-		EncodedPuzzle: req.Puzzle,
+		EncodedPuzzleLength: req.PuzzleLength,
 	}, nil
 }
 
