@@ -12,18 +12,18 @@ if it is divisible by 3 AND 5 integer should be converted to FizzBuzz
 if it is not divisible by 3 or 5, integer should not be converted
 */
 func Solve(puzzleLength int) string {
-	return decodeEachFizzBuzzPuzzleItem(puzzleLength, "")
+	return decodeEachFizzBuzzPuzzleNumber(puzzleLength, "")
 }
 
-func decodeEachFizzBuzzPuzzleItem(itemsLeft int, decodedItems string) string {
-	if itemsLeft == 0 {
-		return decodedItems
+func decodeEachFizzBuzzPuzzleNumber(numbersLeft int, decodedNumbers string) string {
+	if numbersLeft == 0 {
+		return decodedNumbers
 	}
-	nextDecodedItem := decodeFizzBuzzPuzzleItem(itemsLeft)
-	return decodeEachFizzBuzzPuzzleItem(itemsLeft-1, nextDecodedItem+decodedItems)
+	nextDecodedNumber := decodeFizzBuzzPuzzleNumber(numbersLeft)
+	return decodeEachFizzBuzzPuzzleNumber(numbersLeft-1, nextDecodedNumber+decodedNumbers)
 }
 
-func decodeFizzBuzzPuzzleItem(n int) string {
+func decodeFizzBuzzPuzzleNumber(n int) string {
 	if isDivisibleByThree(n) && isDivisibleByFive(n) {
 		return "FizzBuzz"
 	}
