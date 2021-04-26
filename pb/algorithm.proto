@@ -4,12 +4,25 @@ option go_package = "github.com/audrenbdb/algorithm-microsrv/pb";
 
 service Solve {
     rpc FizzBuzz(FizzBuzzRequest) returns (FizzBuzzResponse) {}
+    rpc History(HistoryRequest) returns (HistoryResponse){}
 }
 
 message FizzBuzzRequest {
     int32 puzzleLength = 1;
 }
 
+message HistoryRequest {}
+
+message HistoryResponse {
+    repeated ResolutionResponse resolutions = 1;
+}
+
 message FizzBuzzResponse {
-    string solution = 1;
+    ResolutionResponse resolution = 1;
+}
+
+message ResolutionResponse {
+    string dateResolved = 1;
+    string puzzleName = 2;
+    string solution = 3;
 }

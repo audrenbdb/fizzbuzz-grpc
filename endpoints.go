@@ -9,19 +9,25 @@ import (
 
 type Endpoints struct {
 	FizzBuzz endpoint.Endpoint
+	History  endpoint.Endpoint
 }
 
 type FizzBuzzRequest struct {
 	EncodedPuzzleLength int32
 }
-
 type FizzBuzzResponse struct {
-	DecodedPuzzle string
+	Resolution resolution
+}
+
+type HistoryRequest struct{}
+type HistoryResponse struct {
+	Resolutions []resolution
 }
 
 func CreateEndpoints(s *service) Endpoints {
 	return Endpoints{
 		FizzBuzz: createFizzBuzzEndpoint(s),
+		History:  createHistoryEndpoint(s),
 	}
 }
 
@@ -29,6 +35,13 @@ func createFizzBuzzEndpoint(s *service) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(FizzBuzzRequest)
 		res, _ := s.FizzBuzz(ctx, req.EncodedPuzzleLength)
-		return FizzBuzzResponse{DecodedPuzzle: res}, nil
+		return FizzBuzzResponse{Resolution: res}, nil
+	}
+}
+
+func createHistoryEndpoint(s *service) endpoint.Endpoint {
+	return func(ctx context.Context, request interface{}) (interface{}, error) {
+		res, _ := s.History(ctx)
+		return HistoryResponse{Resolutions: res}, nil
 	}
 }

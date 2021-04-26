@@ -7,16 +7,24 @@ import (
 	"github.com/audrenbdb/algorithm-microsrv/fizzbuzz"
 )
 
-type service struct{}
+type service struct {
+	repo repo
+}
 
-func NewService() *service {
-	return &service{}
+func NewService(repo repo) *service {
+	return &service{repo: repo}
 }
 
 type Service interface {
-	FizzBuzz(ctx context.Context, encodedPuzzleLength int32) (string, error)
+	FizzBuzz(ctx context.Context, encodedPuzzleLength int32) (resolution, error)
+	History(ctx context.Context) ([]resolution, error)
 }
 
-func (s *service) FizzBuzz(_ context.Context, puzzleLength int32) (string, error) {
-	return fizzbuzz.Solve(int(puzzleLength)), nil
+func (s *service) FizzBuzz(_ context.Context, puzzleLength int32) (resolution, error) {
+	decodedFizzBuzz := fizzbuzz.Solve(int(puzzleLength))
+	return s.repo.SaveResolution("FizzBuzz", decodedFizzBuzz), nil
+}
+
+func (s *service) History(_ context.Context) ([]resolution, error) {
+	return s.repo.GetSolvedPuzzleHistory(), nil
 }

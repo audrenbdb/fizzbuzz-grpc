@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	srvc := algorithm.NewService()
+	srvc := algorithm.NewService(algorithm.NewInMemRepo())
 	fizzBuzzEndpoint := algorithm.CreateEndpoints(srvc)
 	grpcServer := algorithm.NewGRPCServer(fizzBuzzEndpoint)
 	grpcListener, err := net.Listen("tcp", ":50051")
